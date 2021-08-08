@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            width: 100%;
+            height: 50%;
+            text-align: center;
+            position: relative;
+        }
+        #fullName{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 50px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button{
+            width: 85px;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+            font-style: oblique;
+        }
+        .display_items{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 5px;
+            width: 65%;
+            height: 70%;
+            text-align: -webkit-center;
+        }
+        .items{
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .items td, .items th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .items th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #6b706e;
+            color: white;
+        }
+        .items  tr:nth-child(even){background-color: #f2f2f2;}
+        .items  tr:hover {background-color: #ddd;}
+    </style>
+    <body>
+        <div class="main">
+            <input type="text" name="fullName" id="fullName" required>
+            <button id="entry">Search</button>
+    </div>
+    <div class="display_items">
+        <table class="items" id="display">
+                <tr class="head">
+                    <th>Employee Name</th>
+                    <th>Employee Id</th>
+                    <th>Employee Age</th>
+                    <th>Employee Roll</th>
+                </tr>  
+                <br>
+                <br>
+            <tbody id="body">
+
+            </tbody>
+        </table>
+    </div>
+    </body> 
+    <script>
+        var Array = [
+            {'name': 'Sitaramaraju', 'id':'Emp001', 'age':'25', 'roll':'Full Stack Developer'},
+            {'name': 'Madhu Sudhan', 'id':'Emp002', 'age':'26', 'roll':'Full Stack Developer'},
+            {'name': 'Ashfaaq', 'id':'Emp003', 'age':'25', 'roll':'Sr. Java Developer'},
+            {'name': 'Krishna Sai', 'id':'Emp004', 'age':'25', 'roll':'Back-End Developer'},
+            {'name': 'Srikanth', 'id':'Emp005', 'age':'24', 'roll':'Front-End Developer'},
+            {'name': 'Hari', 'id':'Emp006', 'age':'26', 'roll':'Front-End Developer'},
+            {'name': 'Kalyan Tarun', 'id':'Emp007', 'age':'25', 'roll':'Back-End Developer'},
+            {'name': 'Suresh', 'id':'Emp008', 'age':'25', 'roll':'Full Stack Developer'},
+            {'name': 'Ganesh', 'id':'Emp009', 'age':'25', 'roll':'Sr. Java Developer'},
+            {'name': 'Jeevan', 'id':'Emp010', 'age':'25', 'roll':'Front-End Developer'},
+            {'name': 'Hema Kumar', 'id':'Emp011', 'age':'27', 'roll':'Sr. Java Developer'},
+            {'name': 'Vagdevi', 'id':'Emp012', 'age':'24', 'roll':'Back-End Developer'},
+            {'name': 'Swathi', 'id':'Emp013', 'age':'24', 'roll':'Front-End Developer'}
+        ];
+
+        var entry = document.getElementById("entry");
+        displayData(Array); 
+
+       entry.onclick = function (){
+            var value = document.getElementById("fullName").value;
+            var dataFilter =[]
+            for(let i=0; i<Array.length; i++){
+                if(!value){
+                    alert("Search Bar want to fill with Name or Id")
+                    break;
+                }else
+                if(value.includes(Array[i].name) || value.includes(Array[i].id) || value.includes(Array[i].age) || value.includes(Array[i].roll)){
+                    dataFilter.push(Array[i]);
+                }
+            }
+            return displayData(dataFilter);
+        }            
+
+        function displayData(data){
+            var table = document.getElementById("body");
+            table.innerHTML=''
+            for(let  i=0; i<data.length; i++){
+                var row = `<tr>
+                                <td>${data[i].name}</td>
+                                <td>${data[i].id}</td>
+                                <td>${data[i].age}</td>
+                                <td>${data[i].roll}</td>
+                           </tr>`
+                    table.innerHTML += row;
+            }
+            
+        }
+
+    </script>
+</html>

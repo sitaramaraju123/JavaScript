@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo-List</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    header{
+        margin: 15px;
+        padding: 10px;
+        font-size: 25px;
+        text-align: center;
+        font-variant: small-caps;
+        font-family: fantasy;
+    }
+    body{
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(98deg, #5bbf53, #18b3fa);   
+    }
+    div{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 5px;
+        box-shadow: 5px 0px 10px 2px;
+    }
+    #input, #add{
+        font-size: 20px;
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+    }
+    #add{
+        cursor: pointer;
+        font-variant: small-caps;
+        font-family: fantasy;
+    }
+    #list{
+        list-style: none;
+        padding: 5px;
+        margin: 5px;
+    }
+    li{
+        cursor: pointer;
+        font-size: 16px;
+        border-bottom: 0.5px solid;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 5px;
+        transition: color .5s;
+    }
+    li:hover{
+        color: white;
+    }
+    #clear{
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        font-variant: small-caps;
+        font-family: fantasy;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+</style>
+<body>
+    <header>Todo List</header>
+    <div>
+            <input type="text" id="input"/>
+            <button id="add">Add</button>
+     
+            <ul id="list"></ul>
+      
+            <button id="clear">Clear All</button>
+    </div>
+</body>
+<script>
+    const input = document.getElementById('input');
+    const btn = document.getElementById('add');
+    const item = document.getElementById('list');
+   // const removebtn = document.getElementById('remove');
+    const clearbtn = document.getElementById('clear');
+    // let addItem = [];
+
+   showItem();
+   btn.onclick = () => {
+       let getLocalStorage = localStorage.getItem("Todo List");
+       if(getLocalStorage === null){
+           addItem = [];
+       }else{
+           addItem = JSON.parse(getLocalStorage);
+       }
+       let userData = input.value;
+       if(userData === ""){
+           alert("Sorry please check your input")
+           
+       }else{
+           addItem.push(userData);
+           localStorage.setItem("Todo List", JSON.stringify(addItem));
+           showItem();
+       }
+   }
+
+   function showItem(){
+    let getLocalStorage = localStorage.getItem("Todo List");
+       if(getLocalStorage === null){
+           addItem = [];
+       }else{
+           addItem = JSON.parse(getLocalStorage);
+       }
+       let newList = '';
+       addItem.forEach((element, index) => {
+           newList += `<li onclick = "remove(${index})";> ${element} </li>`;
+       });
+       item.innerHTML = newList;
+       input.value='';
+   }
+
+   function remove(index){
+    let getLocalStorage = localStorage.getItem("Todo List");
+    addItem = JSON.parse(getLocalStorage);
+    addItem.splice(index, 1);
+    localStorage.setItem("Todo List", JSON.stringify(addItem));
+
+    showItem();
+   }
+//    removebtn.onclick = () => {
+//     let getLocalStorage = localStorage.getItem("Todo List");
+//        if(getLocalStorage === null){
+//            addItem = [];
+//        }else{
+//            addItem = JSON.parse(getLocalStorage);
+//        }
+//        let userData = input.value;
+//        addItem.pop(userData);
+//        localStorage.setItem("Todo List", JSON.stringify(addItem));
+//        showItem();
+//    }
+
+   clearbtn.onclick = () =>{
+    let getLocalStorage = localStorage.getItem("Todo List");
+       if(getLocalStorage === null){
+           addItem = [];
+       }else{
+           addItem = JSON.parse(getLocalStorage);
+       }
+       addItem.length = 0;
+       localStorage.setItem("Todo List", JSON.stringify(addItem));
+
+       showItem();
+   }
+</script>
+</html>

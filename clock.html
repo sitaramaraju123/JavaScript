@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Clock</title>
+    </head>
+    <style>
+        body{
+            height: 0;
+            background: linear-gradient(120deg, #b4ce0d, #1c17f3cc);
+        }
+        #clockContainer{
+            width: 35vw;
+            height: 35vw;
+            background: url(clock.png) no-repeat;
+            background-size: 100%;
+            margin: auto;
+            position: relative;
+            top: 75px;
+        }
+        #hour, #min, #sec{
+            position: absolute;
+            background:black;
+            border-radius: 10px;
+            transform-origin: bottom;
+        }
+        #hour{
+            width: 2%;
+            height: 27%;
+            top: 23%;
+            left: 48.85%;
+            background-color: red;
+            opacity: 0.8;
+        }
+        #min{
+            width: 1.5%;
+            height: 36%;
+            top: 14%;
+            left: 49.1%;
+            opacity: 0.8;
+        }
+        #sec{
+            width: 1%;
+            height: 40%;
+            top: 10%;
+            left: 49.3%;
+            opacity: 0.8;
+        }
+    </style>
+    <body>
+        <div id="clockContainer">
+            <div id="hour"></div>
+            <div id="min"></div>
+            <div id="sec"></div>
+        </div>
+    </body>
+    <script>
+        const deg = 6;
+        const hr = document.querySelector("#hour");
+        const mn = document.querySelector("#min");
+        const sc = document.querySelector("#sec");
+        setInterval(() => {
+            let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+
+            hr.style.transform=`rotateZ(${(hh)+(mm/12)}deg)`;
+            mn.style.transform=`rotateZ(${mm}deg)`;
+            sc.style.transform=`rotateZ(${ss}deg)`;
+        })
+    </script>
+</html>
+
+<!-- date = new Date();
+            htime = date.getHours();
+            mtime = date.getMinutes();
+            stime = date.getSeconds();
+            hrotation = 30*htime + mtime/2;
+            mrotation = 6*mtime;
+            srotation = 6*stime;
+            hour.style.transform=`rotate(${(hrotation)}deg)`;
+            min.style.transform=`rotateZ(${mrotation}deg)`;
+            sec.style.transform=`rotateZ(${srotation}deg)`; -->

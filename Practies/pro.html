@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="input" placeholder="Add or Search">
+        <button id="add">Add</button>
+        <button id="search">Search</button>
+
+        <ul id="list"></ul>
+
+        <button id="clear">Clear All</button>
+    </div>
+</body>
+<script>
+    const input = document.getElementById('input');
+    const addbtn = document.getElementById('add');
+    const searchbtn = document.getElementById('search');
+    const list = document.getElementById('list');
+    const clearbtn = document.getElementById('clear');
+    let userData;
+
+    addbtn.onclick = () => {
+        let getLocalStorage = localStorage.getItem("New Data");
+       if(getLocalStorage === null){
+           addlist = [];
+       }else{
+           addlist = JSON.parse(getLocalStorage);
+       }
+         userData = input.value;
+       if(userData === ""){
+           alert("Sorry please check your input")
+           
+       }else{
+           addlist.push(userData);
+           localStorage.setItem("New Data", JSON.stringify(addlist));
+       }
+       
+    }
+
+</script>
+</html>

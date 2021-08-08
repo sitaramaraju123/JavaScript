@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* .avatar {
+      width: 5rem;
+      height: 5rem;
+      background-color: royalblue;
+      float: left;
+    }
+    .content {
+      border: 2px solid lightgrey;
+    }
+
+    /* This is the another approch to solve the floaing problem (Sudo Elements) */
+    /* .clearfix::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .clear {
+      clear: both;
+    } */
+    .container {
+      border: 3px solid lightgrey;
+      display: flex;
+      flex-direction: column;
+    }
+    .box {
+      width: 5rem;
+      height: 5rem;
+      background-color: gold;
+      margin: 5px;
+    }
+  </style>
+  <body>
+    <!-- <article class="content clearfix">
+      <div class="avatar"></div>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus,
+        dignissimos.
+      </p>
+       <div class="clear"></div>   This is also get some issues to clear a float element to Solve that we can
+    use Sudo Elements. u can see this approch in style tag-->
+
+    <!-- <p class="clear">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
+        consequuntur! Porro repellat facere reprehenderit? Voluptatum
+        temporibus, beatae laudantium corrupti, mollitia consectetur veritatis
+        tenetur quisquam commodi excepturi facilis eos doloribus, labore debitis
+        voluptates fugiat harum quae ab voluptas suscipit tempore dolorem?
+        Adipisci quaerat similique quae ullam voluptates facilis itaque
+        explicabo accusantium.
+      </p> -->
+    <!-- </article> -->
+    <div class="container">
+      <div class="box">A</div>
+      <div class="box">B</div>
+      <div class="box">C</div>
+    </div>
+  </body>
+</html>

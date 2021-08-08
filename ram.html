@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+    </head>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .main{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: dimgray;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .keys{
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            margin: 3px;
+            cursor: pointer;
+            border: 1px solid;
+            border-radius: 5px;
+            color: #ebf1f1;
+            background-color: dimgray;
+        }
+        .operator{
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            margin: 3px;
+            cursor: pointer;
+            border: 1px solid;
+            border-radius: 5px;
+            color: #ebf1f1;
+            background-color: dimgray;
+        }
+        .screen{
+            width: 215px;
+            margin: 4px;
+            font-size: 40px;
+            text-align: right;
+            padding: 4px;
+            border: 1px solid;
+            border-radius: 5px;
+        }
+    </style>
+    <body>
+        <div class="main">
+            <input class="screen" type="text">
+            <table>
+                <tr>
+                    <td><input class="operator" type="button" value="C"></td>
+                    <td><input class="operator" type="button" value="<"></td>
+                    <td><input class="operator" type="button" value="%"></td>
+                    <td><input class="operator" type="button" value="/"></td>
+                </tr>
+                <tr>
+                    <td><input class="keys" type="button" value="9"></td>
+                    <td><input class="keys" type="button" value="8"></td>
+                    <td><input class="keys" type="button" value="7"></td>
+                    <td><input class="operator" type="button" value="*"></td>
+                </tr>
+                <tr>
+                    <td><input class="keys" type="button" value="6"></td>
+                    <td><input class="keys" type="button" value="5"></td>
+                    <td><input class="keys" type="button" value="4"></td>
+                    <td><input class="operator" type="button" value="-"></td>
+                </tr>
+                <tr>
+                    <td><input class="keys" type="button" value="3"></td>
+                    <td><input class="keys" type="button" value="2"></td>
+                    <td><input class="keys" type="button" value="1"></td>
+                    <td><input class="operator" type="button" value="+"></td>
+                </tr>
+                <tr>
+                    <td><input class="operator" type="button" value="+/-"></td>
+                    <td><input class="keys" type="button" value="0"></td>
+                    <td><input class="keys" type="button" value="."></td>
+                    <td><input class="operator" type="button" value="="></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+    <script>
+        var num = document.getElementsByClassName("keys");
+        var op = document.getElementsByClassName("operator");
+        var screen = document.querySelector(".screen");
+        const arr = ["+", "-", "*", "/", "%"];
+        for(let i=0; i<num.length; i++){
+            num[i].addEventListener('click', () => {
+                screen.value += num[i].value;
+            });
+        }
+
+        for(let i=0; i<op.length; i++){
+            op[i].addEventListener('click', () => {
+                if(op[i].value === "C"){
+                    screen.value = "";
+                }
+
+                if(op[i].value === "<"){
+                    var output = screen.value;
+                    screen.value = output.substr(0, output.length-1);
+                }
+
+                if(op[i].value === "="){
+                    var result = screen.value;
+                    if(result){
+                    screen.value = eval(result);
+                    }
+                }
+
+                for(let j=0; j<arr.length; j++){
+                    if(op[i].value === arr[j]){
+                        if(/[/*+\-%]+$/.test(screen.value)){
+                            screen.value = `${screen.value.substr(0, screen.value.length-1)}${op[i].value}`;
+                            console.log(screen.value);
+                            break;
+                        }else if(op[i].value === "-") {
+                                screen.value +=op[i].value;
+                            }
+                         if(screen.value.length) screen.value += op[i].value
+
+                         
+                    }
+                }
+
+                if(op[i].value === "+/-"){
+                   const match = screen.value.match(/(?<=[\+\-x\/]?)\d+$/);
+                   if(match){
+                    const firstPart = screen.value.substr(0, match.index);
+                    screen.value = `${firstPart}-${match[0]}`;
+                   }
+
+                }
+            });
+        }
+    </script>
+</html>

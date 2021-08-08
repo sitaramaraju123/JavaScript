@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculate</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+      background-color: rgb(223, 241, 235);
+    }
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 1px solid;
+      border-radius: 15px;
+      padding: 10px;
+      color: slategray;
+      box-shadow: 10px 0px 10px 2px;
+      width: 35%;
+    }
+    input {
+      font-size: 15px;
+      padding: 10px;
+      margin: 10px;
+      border: 0px;
+      border-radius: 5px;
+    }
+    button {
+      font-size: 15px;
+      padding: 5px;
+      margin: 4px;
+      width: 95%;
+      border: 3px;
+      border-radius: 2px;
+      text-align: center;
+      background-color: transparent;
+      cursor: pointer;
+    }
+
+    button span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+
+    button span:after {
+      content: "\00bb";
+      position: fixed;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+
+    button:hover span {
+      padding-right: 25px;
+    }
+
+    button:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
+
+    h2 {
+      text-align: center;
+    }
+    .test {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(5%, -60%);
+      font-size: 40px;
+      font-variant: small-caps;
+      text-shadow: 5px 5px 9px;
+    }
+    #demo {
+      text-align: center;
+      padding: 5px;
+      margin: 5px;
+      border: 1px;
+      border-radius: 15px;
+      color: unset;
+      font-variant: small-caps;
+      font-size: 15px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div><h2>Exam Results</h2></div>
+      <div class="test">
+        Welcome To<br />
+        <p>Result zone</p>
+      </div>
+      <input type="text" id="java" placeholder="Java" required /><br />
+      <input type="text" id="python" placeholder="Python" required /><br />
+      <input
+        type="text"
+        id="javascript"
+        placeholder="JavaScript"
+        required
+      /><br />
+      <input type="text" id="html" placeholder="HTML" required /><br />
+      <input type="text" id="css" placeholder="CSS" required /><br />
+      <hr />
+      <p id="demo"></p>
+      <button id="result"><span>Result</span></button>
+    </div>
+  </body>
+  <script>
+    const result = document.getElementById("result");
+    result.onclick = () => {
+      let java = document.getElementById("java").value;
+      let python = document.getElementById("python").value;
+      let javascript = document.getElementById("javascript").value;
+      let html = document.getElementById("html").value;
+      let css = document.getElementById("css").value;
+      let grade = "";
+      let demo = document.getElementById("demo");
+
+      let Total =
+        parseFloat(java) +
+        parseFloat(python) +
+        parseFloat(javascript) +
+        parseFloat(html) +
+        parseFloat(css);
+
+      let percentage = (Total / 500) * 100;
+
+      if (percentage <= 100 && percentage >= 80) {
+        grade = "A";
+      } else if (percentage <= 79 && percentage >= 60) {
+        grade = "B";
+      } else if (percentage <= 59 && percentage >= 40) {
+        grade = "C";
+      } else if (percentage <= 39 && percentage >= 25) {
+        grade = "D";
+      } else {
+        grade = "F";
+      }
+
+      if (
+        java === "" ||
+        python === "" ||
+        javascript === "" ||
+        html === "" ||
+        css === ""
+      ) {
+        alert("Please Enter your Marks..");
+      } else if (!Total) {
+        alert("You have to enter only Numbers");
+      } else {
+        if (percentage < 35) {
+          demo.innerHTML = `Total Marks :- ${Total}/500. <br>
+                percentage :- ${percentage}%. <br> Grade :- ${grade} <br> you are Fail`;
+        } else {
+          demo.innerHTML = `Total Marks :- ${Total}/500. <br>
+                percentage :- ${percentage}%. <br> Grade :- ${grade} <br> you are Pass`;
+        }
+      }
+    };
+  </script>
+</html>

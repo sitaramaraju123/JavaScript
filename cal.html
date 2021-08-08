@@ -1,0 +1,181 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --width: 360px;
+        --height: 400px;
+
+        --display-font: monospace;
+        --display-font-size: 66px;
+        --display-bg: transparent;
+        --display-height: 80px;
+
+        --key-font-size: 24px;
+        --key-height: 60px;
+        --key-bg: #f1742b;
+        --key-color: white;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .calc-container {
+        width: 90%;
+        height: 90%;
+        border: 1px solid green;
+        max-width: var(--width);
+        max-height: var(--height);
+      }
+
+      .display {
+        height: var(--display-height);
+        width: 100%;
+      }
+
+      .display input {
+        font-size: var(--display-font-size);
+        font-family: var(--display-font);
+        width: 100%;
+        text-align: right;
+      }
+      .display input,
+      .display input:focus {
+        outline: none;
+        border: none;
+      }
+
+      .row {
+        margin: 4px auto;
+        display: grid;
+        gap: 4px;
+
+        grid: auto-flow / 1fr 1fr 1fr 1fr;
+      }
+
+      .row:last-of-type {
+        grid: auto-flow / 2fr 1fr 1fr;
+      }
+
+      .key {
+        font-weight: 800;
+        cursor: pointer;
+        font-size: var(--key-font-size);
+        font-family: var(--display-font);
+        height: var(--key-height);
+        color: var(--key-color);
+        background-color: var(--key-bg);
+      }
+    </style>
+  </head>
+  <body class="center">
+    <div class="calc-container">
+      <div class="display">
+        <input type="text"/>
+      </div>
+      <div class="keyboard">
+        <div class="row">
+          <div class="key center op" id="clear">C</div>
+          <div class="key center op" id="+/-">+/-</div>
+          <div class="key center op" id="%">%</div>
+          <div class="key center op" id="/">/</div>
+        </div>
+
+        <div class="row">
+          <div class="key center num" id="7">7</div>
+          <div class="key center num" id="8">8</div>
+          <div class="key center num" id="9">9</div>
+          <div class="key center op" id="*">*</div>
+        </div>
+
+        <div class="row">
+          <div class="key center num" id="4">4</div>
+          <div class="key center num" id="5">5</div>
+          <div class="key center num" id="6">6</div>
+          <div class="key center op" id="-">-</div>
+        </div>
+
+        <div class="row">
+          <div class="key center num" id="1">1</div>
+          <div class="key center num" id="2">2</div>
+          <div class="key center num" id="3">3</div>
+          <div class="key center op" id="+">+</div>
+        </div>
+
+        <div class="row">
+          <div class="key center num" id="0">0</div>
+          <div class="key center num" id=".">.</div>
+          <div class="key center op" id="=">=</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const keys = document.getElementsByClassName("op");
+      const num = document.querySelectorAll(".num");
+      const display = document.querySelector(".display input");
+      const opr = ["+", "-", "*", "/", "%"];
+      for(let i=0; i<keys.length; i++){
+          keys[i].addEventListener('click', function(e){
+            if(keys[i]===clear){
+                  display.value = "";
+              }
+
+              if(e.target.innerText == "+/-"){
+                const match = display.value.match(/(?<=[\+\-x\/]?)\d+$/);
+                if (match) {
+                const firstPart = display.value.substr(0, match.index);
+                display.value = `${firstPart}-${match[0]}`;
+                } 
+              }
+
+              for(let j=0; j<opr.length; j++){         
+                  if(e.target.innerText == opr[j]){
+                  if (/[/*+\-%]+$/.test(display.value)) {
+                    display.value = `${display.value.substr(0, display.value.length -1)}${e.target.innerText}`; //e.target.innerText;
+                    break;
+                }
+                   if(e.target.innerText === "-") {
+                     display.value+=e.target.innerText;
+                    }else if(display.value.length) display.value += e.target.innerText;
+                  }
+              }
+                       
+              if(e.target.innerText == "="){
+                const res = eval(display.value);
+                display.value = res;
+              }
+              
+          });
+      }
+
+      for(let i=0; i<num.length; i++){
+        num[i].addEventListener('click', function(e){
+             if(display!=NaN){
+                 display.value += e.target.innerText;
+             }
+          });
+      }
+    </script>
+  </body>
+</html>

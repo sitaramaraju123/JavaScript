@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="form.css" />
+    <title>Form page</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="form" class="form">
+        <h2>Register Form</h2>
+        <div class="form-control">
+          <label class="userName">Username</label>
+          <input type="text" id="username" placeholder="Enter Username" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label class="email">Email</label>
+          <input type="text" id="email" placeholder="Enter Email" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label class="password">Password</label>
+          <input type="password" id="password" placeholder="Enter Password" />
+          <small>Error message</small>
+        </div>
+        <div class="form-control">
+          <label class="cpassword">Conform Password</label>
+          <input
+            type="password"
+            id="cpassword"
+            placeholder="Conform Password"
+          />
+          <small>Error message</small>
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+    <script src="form.js"></script>
+  </body>
+</html>

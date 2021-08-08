@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Function</title>
+  </head>
+  <style>
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --width: 360px;
+      --height: 400px;
+
+      --display-font: monospace;
+      --display-font-size: 66px;
+      --display-bg: transparent;
+      --display-height: 80px;
+
+      --key-font-size: 24px;
+      --key-height: 60px;
+      --key-bg: #f1742b;
+      --key-color: white;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .calc-container {
+      width: 90%;
+      height: 90%;
+      border: 1px solid green;
+      max-width: var(--width);
+      max-height: var(--height);
+    }
+
+    .display {
+      height: var(--display-height);
+      width: 100%;
+    }
+
+    .display input {
+      font-size: var(--display-font-size);
+      font-family: var(--display-font);
+      width: 100%;
+      text-align: right;
+    }
+    .display input,
+    .display input:focus {
+      outline: none;
+      border: none;
+    }
+
+    .row {
+      margin: 4px auto;
+      display: grid;
+      gap: 4px;
+
+      grid: auto-flow / 1fr 1fr 1fr 1fr;
+    }
+
+    .row:last-of-type {
+      grid: auto-flow / 2fr 1fr 1fr;
+    }
+    .key {
+      font-weight: 800;
+      cursor: pointer;
+      font-size: var(--key-font-size);
+      font-family: var(--display-font);
+      height: var(--key-height);
+      color: var(--key-color);
+      background-color: var(--key-bg);
+    }
+  </style>
+  <body class="center">
+    <div class="calc-container"></div>
+
+    <script>
+      const container = document.querySelector(".calc-container");
+      let display = null;
+      const matrix = [
+        ["C", "+/-", "%", "/"],
+        ["1", "2", "3", "+"],
+        ["4", "5", "6", "-"],
+        ["7", "8", "9", "x"],
+        ["0", ".", "="]
+      ];
+
+      function createElm(type, ...classes) {
+        const elm = document.createElement(type);
+        classes.forEach(c => elm.classList.add(c));
+        return elm;
+      }
+
+      function createDisplay() {
+        const div = createElm("div", "display");
+        display = createElm("input");
+        display.type = "text";
+        display.value = "";
+        div.appendChild(display);
+        return div;
+      }
+
+      function createKey(val) {
+        const key = createElm("div", "key", "center");
+        key.addEventListener("click", onKeyPress);
+        key.innerText = val;
+        return key;
+      }
+
+      function createRow(r) {
+        const row = createElm("div", "row");
+        const keys = r.map(createKey); //(k) =>  createKey(k)
+        row.append(...keys);
+        return row;
+      }
+
+      function createKeyboard() {
+        const keyboard = createElm("div", "keyboard");
+        const rows = matrix.map(createRow); //(k) =>  createKey(k)
+        keyboard.append(...rows);
+        return keyboard;
+      }
+
+      function createCalc() {
+        const displayElm = createDisplay();
+        const keyboard = createKeyboard();
+        container.append(displayElm, keyboard);
+      }
+
+      function onKeyPress(e) {
+        switch (e.target.innerText) {
+          case "1":
+          case "2":
+          case "3":
+          case "4":
+          case "5":
+          case "6":
+          case "7":
+          case "8":
+          case "9":
+          case "0":
+            display.value += e.target.innerText;
+            break;
+          case "+":
+          case "-":
+          case "x":
+          case "/":
+          case "%":
+            if (/[\\x+\-%]+$/.test(display.value)) {
+              break;
+            }
+
+            display.value += e.target.innerText;
+            break;
+          case "C":
+            display.value = "";
+            break;
+          case "+/-":
+            const match = display.value.match(/(?<=[\+\-x\/]?)\d+$/);
+            if (match) {
+              const firstPart = display.value.substr(0, match.index);
+
+              display.value = `${firstPart}-${match[0]}`;
+            }
+            break;
+          case "=": {
+            try {
+              const res = eval(display.value.replace(/x/g, "*"));
+              display.value = res;
+            } catch (err) {
+              console.log(err.message);
+            }
+
+            break;
+          }
+          default:
+            return;
+        }
+      }
+      createCalc();
+    </script>
+  </body>
+</html>

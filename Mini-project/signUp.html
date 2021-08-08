@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signUp.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form class="form" id="form">
+        <h2>Registration From</h2>
+        <div class="form-content">
+          <label class="fname">FirstName</label>
+          <input type="text" id="firstname" placeholder="First Name" />
+          <small>Error msg</small>
+        </div>
+        <div class="form-content">
+          <label class="lname">Lastname</label>
+          <input type="text" id="lastname" placeholder="Last Name" />
+          <small>Error msg</small>
+        </div>
+        <div class="form-content">
+          <label class="uname">Username</label>
+          <input type="text" id="username" placeholder="Create Username" />
+          <small>Error msg</small>
+        </div>
+        <div class="form-content">
+          <label class="pwd">Password</label>
+          <input type="password" id="password" placeholder="Create Password" />
+          <small>Error msg</small>
+        </div>
+        <div class="form-content">
+          <label class="cpwd">Conform Password</label>
+          <input
+            type="password"
+            id="cpassword"
+            placeholder="Conform Password"
+          />
+          <small>Error msg</small>
+        </div>
+        <button id="btn">Sign Up</button>
+        <p>
+          if your are already have an Account <a href="login.html">Login</a>
+        </p>
+      </form>
+    </div>
+    <script src="signup.js"></script>
+  </body>
+</html>

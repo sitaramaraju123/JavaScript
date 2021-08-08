@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="additems">
+      <h2>Employee detials</h2>
+      <input
+        type="text"
+        class="input"
+        id="uname"
+        placeholder="Enter your Name"
+      />
+      <input type="text" class="input" id="age" placeholder="Enter your Age" />
+      <input type="text" class="input" id="empID" placeholder="Employee Id" />
+      <input type="text" class="input" id="role" placeholder="Employee Role" />
+      <button id="btn">Add</button>
+    </div>
+
+    <div class="main">
+      <input
+        type="text"
+        name="fullName"
+        id="fullName"
+        placeholder="Search..."
+        required
+      />
+    </div>
+    <div class="display_items">
+      <table class="items" id="display">
+        <tr class="head">
+          <th>Employee Name</th>
+          <th>Employee Age</th>
+          <th>Employee id</th>
+          <th>Employee Role</th>
+        </tr>
+        <br />
+        <br />
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>

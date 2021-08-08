@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Names</title>
+    </head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            width: 100%;
+            height: 50%;
+            text-align: center;
+            position: relative;
+        }
+        #fullName{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button{
+            width: 70px;
+            padding: 12px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+            font-style: oblique;
+        }
+        h2{
+            font-size: revert;
+            font-variant-caps: petite-caps;
+            font-style: oblique;
+            padding: 12px;
+            margin: 8px;
+        }
+        .display_items{        
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid;
+            border-radius: 5px;
+            width: 50%;
+            height: 50%;
+            text-align: -webkit-center;
+        }
+        .items{
+            width: 100%;
+            background-color: lightgray;
+        }
+        #body{
+            text-align: center;
+            font-size: larger;
+            font-variant-caps:petite-caps;
+        }
+        .name{
+            font-size: 30px;
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
+    <body>
+        <div class="main">
+                <h2>Enter Your Name</h2>
+                <input type="text" name="fullName" id="fullName" required>
+                <button id="entry">Add</button>
+        </div>
+        <div class="display_items">
+            <table class="items" id="display">
+                <tbody id="body">
+                    <tr>
+                        <th class="name">Full Name</th>
+                    </tr>  
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script>
+        var entry = document.getElementById("entry");
+        entry.addEventListener("click", displayDetails);
+        var row =1;
+        function displayDetails(){
+            var name = document.getElementById("fullName").value;
+            if(!name){
+                alert("Please fill the box");
+                return;
+            }
+            var display = document.getElementById("display");
+            var newRow = display.insertRow(row);
+            var cell = newRow.insertCell();
+            cell.innerHTML = name;
+        }
+    </script>
+</html>
